@@ -38,11 +38,12 @@ export class ThreadsController {
   }
 
 
-  //@UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Get()
   @ApiOperation({ summary: 'Get all threads' })
-  findAll() {
-    return this.threadsService.findAll();
+  findAll(@Req() req) {
+    const userId = req.user.sub;
+    return this.threadsService.findAll(userId);
   }
 
   @Get(':id')

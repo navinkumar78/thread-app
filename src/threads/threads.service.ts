@@ -14,8 +14,8 @@ export class ThreadsService {
     return this.threadModel.create({ ...dto, author: authorId });
   }
 
-  async findAll() {
-    return this.threadModel.find().populate('author', 'username email').sort({ createdAt: -1 });
+  async findAll(userId: string) {
+    return this.threadModel.find({ author: userId }).populate('author', 'username email').sort({ createdAt: -1 });
   }
 
   async findOne(id: string) {
